@@ -1,5 +1,5 @@
 import Tesseract from 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js';
-import { diff_match_patch } from 'https://cdn.jsdelivr.net/npm/diff-match-patch@1.0.5/lib/diff_match_patch.js';
+import { diff_match_patch } from 'https://esm.sh/diff-match-patch@1.0.5';
 
 class OCRComparisonApp {
     constructor() {
