@@ -1,5 +1,3 @@
-// 導入 CDN 模組（需給 <script type="module"> 使用）
-// 📌 注意語法與相對路徑、本地與 Pages 都可正常
 import Tesseract from 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js';
 import { diff_match_patch } from 'https://cdn.jsdelivr.net/npm/diff-match-patch@1.0.5/lib/diff_match_patch.js';
 
