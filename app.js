@@ -63,14 +63,13 @@ class OCRComparisonApp {
         // 貼上圖片
         document.addEventListener('paste', (e) => { this.handlePaste(e); });
 
-        // OCR 和文本輸入/比對
+        // OCR 和文本輸入/比對事件
         this.runOcrBtn.addEventListener('click', () => this.runOCR());
         this.textA.addEventListener('input', () => this.updateDiff());
         this.textB.addEventListener('input', () => this.updateDiff());
         this.ignoreWhitespace.addEventListener('change', () => this.updateDiff());
         this.ignoreSymbols.addEventListener('change', () => this.updateDiff());
         this.languageSelect.addEventListener('change', () => {
-            // 若已載入圖片可立刻重新進行 OCR
             if (this.currentImage) this.runOCR();
         });
     }
@@ -164,7 +163,7 @@ class OCRComparisonApp {
         const diffs = this.dmp.diff_main(textA, textB);
         this.dmp.diff_cleanupSemantic(diffs);
         const html = this.dmp.diff_prettyHtml(diffs);
-        this.diffOutput.innerHTML = html || '<span>沒有差異</span>';
+        this.diffOutput.innerHTML = html || '沒有差異';
     }
 
     showError(message) {
