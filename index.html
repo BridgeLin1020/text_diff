@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR 文字識別與比對工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>OCR 文字識別與比對工具</h1>
+        
+        <div class="main-layout">
+            <!-- 左側：圖片上傳和OCR控制 -->
+            <div class="column image-column">
+                <div class="card">
+                    <div class="card__header">
+                        <h3>圖片上傳與OCR</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                            <div class="upload-prompt">
+                                <p>點擊、拖曳或直接貼上圖片 (Ctrl+V)</p>
+                                <button type="button" class="btn btn--primary" id="uploadBtn">
+                                    選擇圖片
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="imagePreview" class="image-preview" style="display: none;">
+                            <img id="previewImg" alt="預覽圖片">
+                        </div>
+                        
+                        <div class="ocr-controls">
+                            <div class="form-group">
+                                <label class="form-label" for="languageSelect">識別語言</label>
+                                <select id="languageSelect" class="form-control">
+                                    <option value="eng+chi_sim+chi_tra+jpn">自動 (英文+簡中+繁中+日文)</option>
+                                    <option value="eng">英文</option>
+                                    <option value="chi_tra">繁體中文</option>
+                                    <option value="chi_sim">簡體中文</option>
+                                    <option value="jpn">日文</option>
+                                </select>
+                            </div>
+                            
+                            <button type="button" id="runOcrBtn" class="btn btn--primary btn--full-width" disabled>
+                                開始OCR識別
+                            </button>
+                            
+                            <div id="progressContainer" class="progress-container" style="display: none;">
+                                <div class="progress-bar">
+                                    <div id="progressBar" class="progress-fill"></div>
+                                </div>
+                                <div id="progressText" class="progress-text">處理中...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中間：文字輸入區域 -->
+            <div class="column text-column">
+                <div class="card">
+                    <div class="card__header">
+                        <h3>文字比對</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="form-group">
+                            <label class="form-label" for="textA">A (OCR識別結果)</label>
+                            <textarea id="textA" class="form-control" rows="8" placeholder="OCR識別的文字將顯示在此處..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="textB">B (手動輸入文字)</label>
+                            <textarea id="textB" class="form-control" rows="8" placeholder="請在此處輸入或貼上要比對的文字..."></textarea>
+                        </div>
+                        
+                        <div class="comparison-options">
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="ignoreWhitespace">
+                                    <span class="checkbox-text">忽略空白差異</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="ignoreSymbols">
+                                    <span class="checkbox-text">忽略特殊符號</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右側：差異顯示 -->
+            <div class="column diff-column">
+                <div class="card">
+                    <div class="card__header">
+                        <h3>差異比較結果</h3>
+                    </div>
+                    <div class="card__body">
+                        <div id="diff-output" class="diff-output">
+                            <p class="text-secondary">在左側上傳圖片並進行OCR識別，然後在中間輸入文字進行比對</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="app.js"></script>
+</body>
+</html>
